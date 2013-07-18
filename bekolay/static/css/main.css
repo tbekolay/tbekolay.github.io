@@ -1,0 +1,87 @@
+/* ==========================================================================
+   bekolay.org custom styles
+   ========================================================================== */
+
+/* General stuff */
+
+@media (min-width: 980px) {
+  body {
+    padding-top: 60px;
+  }
+}
+
+body {
+  /* 
+  For Emily: 'Merriweather'      <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+*/
+  font-family: 'PT Serif', serif;
+  font-size: 17px;
+}
+
+/* a, a:hover, a:focus { */
+/*   color: #921907; */
+/* } */
+
+a.anchor{ /* Because # links are off with fixed top nav */
+  display: block;
+  position: relative;
+  top: -60px;
+  visibility: hidden;
+}
+
+/* h1, */
+/* h2, */
+/* h3, */
+/* h4, */
+/* h5, */
+/* h6 { */
+/*   color: #731d1d; */
+/* } */
+
+/* Index icon styling */
+.thumbnail-icon>i {
+  text-shadow: 2px 2px 2px #111;
+  font-size: 600%;
+}
+
+.thumbnail-icon:hover, .thumbnail-icon:focus {
+  color: #005580;
+  text-decoration: none;
+}
+
+/* Footer stuff */
+
+.footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  background-color: #000000;
+  font-size: 120%;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #909090;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.footer a:hover, .footer a:focus {
+  color: white;
+}
+
+@media (min-width: 980px) {
+  .footer {
+    padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  footer {
+    margin-right: -40px;
+  }
+
+  .footer {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}

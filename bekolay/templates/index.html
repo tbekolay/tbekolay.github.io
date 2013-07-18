@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main %}
+  {{ page.html|lead_paragraph|safe }}
+  <div class="row">
+    <ul class="thumbnails">
+      {% for p in page.pages -%}
+      <li class="span2">
+        <div class="thumbnail text-center">
+          {{ p.html|safe }}
+          <a href="{{ p.url }}">
+            <div class="thumbnail-icon">
+              <i class="{{ p.icon }}"></i>
+              <h2>{{ p.title }}</h2>
+            </div>
+          </a>
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+{% endblock main %}
