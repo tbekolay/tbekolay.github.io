@@ -1,0 +1,88 @@
+body {
+  font-family: 'PT Serif', serif;
+  font-size: 18px;
+}
+
+/* a, a:hover, a:focus { */
+/*   color: #921907; */
+/* } */
+
+a.anchor{ /* Because # links are off with fixed top nav */
+  display: block;
+  position: relative;
+  top: -60px;
+  visibility: hidden;
+}
+
+/* h1, */
+/* h2, */
+/* h3, */
+/* h4, */
+/* h5, */
+/* h6 { */
+/*   color: #731d1d; */
+/* } */
+
+#title-cards {
+  font-size: 90%;
+}
+
+#title-cards div.thumbnail {
+  height: 320px;
+  display: table-cell;
+  vertical-align: middle;
+  margin-left: 0px;
+}
+
+@media (max-width: 980px) {
+  #title-cards h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  #title-cards div.thumbnail {
+    height: 100%;
+    width: 300px;
+  }
+}
+
+.thumbnail-icon > i {
+  text-shadow: 2px 2px 2px #111;
+  font-size: 600%;
+}
+
+.thumbnail-icon:hover, .thumbnail-icon:focus {
+  color: #005580;
+  text-decoration: none;
+}
+
+/* Footer stuff */
+
+.tooltip {
+  font-size: 70%;
+}
+
+.footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  font-size: 120%;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+}
+
+.footer a {
+  text-decoration: none;
+  color: #909090;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.footer a:hover, .footer a:focus {
+  color: black;
+}
