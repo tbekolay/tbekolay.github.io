@@ -1,27 +1,42 @@
 body {
   font-family: 'PT Serif', serif;
   font-size: 18px;
+  background-image: url(groovepaper.png);
+  background-repeat: repeat;
 }
 
-/* a, a:hover, a:focus { */
-/*   color: #921907; */
-/* } */
+/* Footer */
 
-a.anchor{ /* Because # links are off with fixed top nav */
-  display: block;
-  position: relative;
-  top: -60px;
-  visibility: hidden;
+.tooltip {
+  font-size: 70%;
 }
 
-/* h1, */
-/* h2, */
-/* h3, */
-/* h4, */
-/* h5, */
-/* h6 { */
-/*   color: #731d1d; */
-/* } */
+.footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 120%;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+}
+
+.footer a {
+  text-decoration: none;
+  color: #909090;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.footer a:hover, .footer a:focus {
+  color: black;
+}
+
+/* Index title cards */
 
 #title-cards {
   font-size: 90%;
@@ -53,36 +68,128 @@ a.anchor{ /* Because # links are off with fixed top nav */
 }
 
 .thumbnail-icon:hover, .thumbnail-icon:focus {
-  color: #005580;
   text-decoration: none;
 }
 
-/* Footer stuff */
+/* blog coloring */
 
-.tooltip {
-  font-size: 70%;
+.blog h1, .blog h2, .blog h3,
+.blog h4, .blog h5, .blog h6 {
+  color: rgb(118, 11, 201);
 }
 
-.footer {
-  margin-top: 50px;
-  padding-top: 20px;
-  font-size: 120%;
+.blog a {
+  color: rgb(118, 11, 201);
 }
 
-@media (max-width: 767px) {
-  .footer {
-    margin-top: 0px;
-    padding-top: 0px;
-  }
+.blog a:hover, .blog a:focus {
+  color: rgb(94, 9, 161);
 }
 
-.footer a {
-  text-decoration: none;
-  color: #909090;
-  padding-left: 5px;
-  padding-right: 5px;
+.blog .thumbnail-icon:hover, .blog .thumbnail-icon:focus,
+.blog .thumbnail-icon:hover > h2, .blog .thumbnail-icon:focus > h2 {
+  color: rgb(94, 9, 161);
 }
 
-.footer a:hover, .footer a:focus {
-  color: black;
+/* research coloring */
+
+.research h1, .research h2, .research h3,
+.research h4, .research h5, .research h6 {
+  color: rgb(23, 11, 201);
+}
+
+.research a {
+  color: rgb(23, 11, 201);
+}
+
+.research a:hover, .research a:focus {
+  color: rgb(18, 9, 161);
+
+}
+
+.research .thumbnail-icon:hover, .research .thumbnail-icon:focus,
+.research .thumbnail-icon:hover > h2, .research .thumbnail-icon:focus > h2 {
+  color: rgb(18, 9, 161);
+}
+
+/* inbetween: rgb(11, 189, 201) => rgb(9, 151, 161) */
+
+/* teaching coloring */
+
+.teaching h1, .teaching h2, .teaching h3,
+.teaching h4, .teaching h5, .teaching h6 {
+  color: rgb(11, 201, 23);
+}
+
+.teaching a {
+  color: rgb(11, 201, 23);
+}
+
+.teaching a:hover, .teaching a:focus {
+  color: rgb(9, 161, 18);
+}
+
+.teaching .thumbnail-icon:hover, .teaching .thumbnail-icon:focus,
+.teaching .thumbnail-icon:hover > h2, .teaching .thumbnail-icon:focus > h2 {
+  color: rgb(9, 161, 18);
+}
+
+/* writing coloring */
+
+.writing h1, .writing h2, .writing h3,
+.writing h4, .writing h5, .writing h6 {
+  color: rgb(189, 201, 11);
+}
+
+.writing a {
+  color: rgb(189, 201, 11);
+}
+
+.writing a:hover, .writing a:focus {
+  color: rgb(151, 161, 9);
+}
+
+.writing .thumbnail-icon:hover, .writing .thumbnail-icon:focus,
+.writing .thumbnail-icon:hover > h2, .writing .thumbnail-icon:focus > h2 {
+  color: rgb(151, 161, 9);
+}
+
+/* software coloring */
+
+.software h1, .software h2, .software h3,
+.software h4, .software h5, .software h6 {
+  color: rgb(201, 118, 11);
+}
+
+.software a {
+  color: rgb(201, 118, 11);
+}
+
+.software a:hover, .software a:focus {
+  color: rgb(161, 94, 9);
+}
+
+.software .thumbnail-icon:hover, .software .thumbnail-icon:focus,
+.software .thumbnail-icon:hover > h2, .software .thumbnail-icon:focus > h2 {
+  color: rgb(161, 94, 9);
+}
+
+/* fun coloring */
+
+.fun h1, .fun h2, .fun h3,
+.fun h4, .fun h5, .fun h6 {
+  color: rgb(201, 23, 11);
+}
+
+.fun a {
+  color: rgb(201, 23, 11);
+}
+
+.fun a:hover, .fun a:focus {
+  color: rgb(161, 18, 9);
+}
+
+.fun .thumbnail-icon:hover, .fun .thumbnail-icon:focus,
+.fun .thumbnail-icon:hover > h2, .fun .thumbnail-icon:focus > h2 {
+  color: rgb(161, 18, 9);
 }
