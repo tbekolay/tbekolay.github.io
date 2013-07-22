@@ -2,12 +2,11 @@
 
 {% block main %}
   {{ page.html|lead_paragraph|safe }}
-  <div class="row">
-    <ul class="thumbnails">
-      {% for p in page.pages -%}
+    <ul class="thumbnails" id="title-cards">
+      {%- for p in page.pages %}
       <li class="span2">
         <div class="thumbnail text-center">
-          {{ p.html|safe }}
+          {{ p }}
           <a href="{{ p.url }}">
             <div class="thumbnail-icon">
               <i class="{{ p.icon }}"></i>
@@ -18,5 +17,4 @@
       </li>
       {%- endfor %}
     </ul>
-  </div>
 {% endblock main %}
