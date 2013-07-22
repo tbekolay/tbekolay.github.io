@@ -14,13 +14,11 @@
   </head>
   <body{% block bodytags %}{% endblock bodytags %}>
     <div class="container">
-      <!-- <div class="row"> -->
-        <div class="page-header">
-          <h1>Trevor Bekolay
-            <small>{% block subtitle %}{% endblock subtitle %}</small>
-          </h1>
-        </div>
-      <!-- </div> -->
+      <div class="page-header">
+        <h1><a href="/">Trevor Bekolay</a>
+          <small>{% block subtitle %}{% endblock subtitle %}</small>
+        </h1>
+      </div>
 {%- block contextlinks -%}{%- endblock contextlinks -%}
 {%- block main -%}{%- endblock main -%}
     <footer>
@@ -44,7 +42,7 @@
             <i class="icon-linkedin"></i>
           </a>
           <a href="http://www.youtube.com/user/tbekolay" data-tooltip title="Videos on YouTube">
-            <i class="icon-youtube"></i>
+            <i class="icon-youtube-play"></i>
           </a>
           <a href="mailto:tbekolay@gmail.com" data-tooltip title="Email me">
             <i class="icon-envelope"></i>

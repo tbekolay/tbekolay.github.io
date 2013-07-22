@@ -1,28 +1,28 @@
 import datetime
 
 # from flask import Flask, Markup
-# from flask import abort, g, render_template, url_for
+from flask import url_for
 # from flask import request, send_from_directory
 
-# from .filters import get_headings, lead_paragraph, nice_date, slugify, youtubify
+from .filters import get_headings, lead_paragraph, nice_date, slugify, youtubify
 
 
 class Model(object):
     def __init__(self, pages_instance):
         self.pages = pages_instance
 
-    def blogposts(self, end=None, start=None, author=None):
-        if author is None:
-            test = lambda p: p.path.startswith('blog/')
-        else:
-            test = lambda p: p.path.startswith('blog/') and author in p['author']
+    def blogpost(self, post):
+        post.url = url_for('blog_post', slug=slugify(post['title']))
+        post.headings = get_headings(post.html)
+        return post
 
-        blogposts = sorted([post for post in self.pages if test(post)],
+    def blogposts(self, start=None, end=None):
+        test = lambda p: p.path.startswith('blog/')
+
+        page = self.pages.get('blog')
+        blogposts = sorted([self.blogpost(p) for p in self.pages
+                            if p.path.startswith('blog/')],
                            reverse=True, key=lambda post: post['date'])
-
-        for post in blogposts:
-            post.url = url_for('blog_post', slug=slugify(post['title']))
-            post.authorlink = self.authorlink(post['author'])
 
         for p1, p2 in zip(blogposts[:-1], blogposts[1:]):
             p1.older = url_for('blog_post', slug=slugify(p2['title']))
@@ -32,7 +32,8 @@ class Model(object):
             blogposts = blogposts[:end]
         if start is not None:
             blogposts = blogposts[start:]
-        return blogposts
+        page.blogposts = blogposts
+        return page
 
     def index(self):
         page = self.pages.get('index')

@@ -5,35 +5,12 @@ body {
   background-repeat: repeat;
 }
 
-/* Footer */
-
-.tooltip {
-  font-size: 70%;
-}
-
-.footer {
-  margin-top: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 120%;
-}
-
-@media (max-width: 767px) {
-  .footer {
-    margin-top: 0px;
-    padding-top: 0px;
-  }
-}
-
-.footer a {
+.page-header a {
   text-decoration: none;
-  color: #909090;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
-.footer a:hover, .footer a:focus {
-  color: black;
+.pager li>a {
+  font-size: 80%;
 }
 
 /* Index title cards */
@@ -47,6 +24,10 @@ body {
   display: table-cell;
   vertical-align: middle;
   margin-left: 0px;
+  background-color: rgb(255, 255, 255);
+  -moz-box-shadow:    3px 3px 2px #ccc;
+  -webkit-box-shadow: 3px 3px 2px #ccc;
+  box-shadow:         3px 3px 2px #ccc;
 }
 
 @media (max-width: 980px) {
@@ -69,6 +50,20 @@ body {
 
 .thumbnail-icon:hover, .thumbnail-icon:focus {
   text-decoration: none;
+}
+
+/* default coloring */
+
+h1, h2, h3, h4, h5, h6 {
+  color: rgb(80, 80, 80);
+}
+
+a {
+  color: rgb(80, 80, 80);
+}
+
+a:hover, a:focus {
+  color: rgb(0, 0, 0);
 }
 
 /* blog coloring */
@@ -192,4 +187,35 @@ body {
 .fun .thumbnail-icon:hover, .fun .thumbnail-icon:focus,
 .fun .thumbnail-icon:hover > h2, .fun .thumbnail-icon:focus > h2 {
   color: rgb(161, 18, 9);
+}
+
+/* Footer */
+
+.tooltip {
+  font-size: 70%;
+}
+
+.footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 120%;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+}
+
+.footer a {
+  text-decoration: none;
+  color: #909090;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.footer a:hover, .footer a:focus {
+  color: black;
 }

@@ -27,13 +27,6 @@ model = Model(pages)
 def index():
     return render_template('index.html', page=model.index())
 
-serve_static = [
-    '/CNAME',
-    '/favicon.ico',
-    '/humans.txt',
-    '/robots.txt',
-]
-
 ### Blog
 
 @app.route('/blog.html')
@@ -41,26 +34,43 @@ serve_static = [
 def blog_index(back=0):
     if back < 0:
         raise ValueError("back is negative. Don't do that.")
-
-    g.topic = 'blog'
-    posts_per_page = 5
+    posts_per_page = 10
     start = back
-    end = back + posts_per_page
-    page = pages.get('blog')
-    page.blogposts = model.blogposts(start=start, end=end)
-    posts = sum([post.path.startswith('blog/') for post in pages])
+    page = model.blogposts(back, back + posts_per_page)
+    posts = len(page.blogposts)
 
     if back > 0:
         page.newer = url_for('blog_index', back=max(0, back - posts_per_page))
     else:
         page.newer = None
     if back < posts - posts_per_page:
-        page.older = url_for('blog_index', back=min(posts - 1, end))
+        page.older = url_for('blog_index',
+                             back=min(posts - 1, back + posts_per_page))
     else:
         page.older = None
 
     return render_template('blog_index.html', page=page)
 
+
+@app.route('/blog_archive.html')
+def blog_archive():
+    return render_template('blog_archive.html', page=model.blogposts())
+
+
+@app.route('/blog/<slug>.html')
+def blog_post(slug):
+    page = model.blogposts()
+    post = next(bp for bp in page.blogposts if slugify(bp['title']) == slug)
+    return render_template('blog_post.html', post=post)
+
+### Static files
+
+serve_static = [
+    '/CNAME',
+    '/favicon.ico',
+    '/humans.txt',
+    '/robots.txt',
+]
 
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
