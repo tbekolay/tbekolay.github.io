@@ -1,7 +1,7 @@
 import os
 import mimetypes
 
-from . import app #, redirects, serve_static
+from . import app, serve_static  #, redirects
 from flask.ext.frozen import Freezer, walk_directory
 
 # Seems to be available only on some systems...
@@ -13,6 +13,6 @@ freezer = Freezer(app)
 # def redirect_url_generator():
 #     return redirects.keys()
 
-# @freezer.register_generator
-# def static_url_generator():
-#     return serve_static
+@freezer.register_generator
+def static_url_generator():
+    return serve_static

@@ -8,8 +8,8 @@ from .filters import get_headings, lead_paragraph, nice_date, slugify, youtubify
 from .pages import FlatPages
 
 DEBUG = True
-SITE_NAME = "CNRGlab @ UWaterloo"
-FREEZER_BASE_URL = 'http://compneuro.uwaterloo.ca/'
+SITE_NAME = "bekolay.org"
+FREEZER_BASE_URL = 'http://bekolay.org/'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -235,12 +235,6 @@ for url in serve_static:
 #     'mastersthesis': 'Thesis',
 #     'article': 'Journal Article',
 # }
-
-
-def _expand_static(url):
-    if url.startswith('static'):
-        return url_for('static', filename=url[url.index('/') + 1:])
-    return url
 
 
 # def _get_authorlink(name):
