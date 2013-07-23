@@ -63,6 +63,11 @@ def blog_post(slug):
     post = next(bp for bp in page.blogposts if slugify(bp['title']) == slug)
     return render_template('blog_post.html', post=post)
 
+@app.route('/research.html')
+def research_index():
+    return render_template('research.html', page=model.research())
+
+
 ### Static files
 
 serve_static = [

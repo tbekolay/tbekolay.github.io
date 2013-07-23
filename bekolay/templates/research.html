@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}, Researcher{% endblock title %}
+{% block subtitle %}Researcher{% endblock subtitle %}
+{% block bodytags %} data-spy="scroll" data-target=".headers-sidenav" class="research"{% endblock bodytags %}
+{% block contextlinks %}
+{%- endblock contextlinks %}
+{% block main %}
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li><a href="#statement" data-toggle="tab">Statement</a></li>
+    <li><a href="#publications" data-toggle="tab">Publications</a></li>
+    <li><a href="#courses" data-toggle="tab">Courses</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane" id="statement">
+      {{ page.statement }}
+    </div>
+    <div class="tab-pane" id="publications">
+      <ol class="list">
+        {%- for pub in page.publications %}
+        <li class="media">
+          <div class="media-body">
+            <strong>
+              {{ pub.title }}
+              <small>({{ pub.journal }}, {{ pub.year }})</small>
+            </strong>
+            <p class="authors">{{ ', '.join(pub.authors)|safe }}</p>
+            <ul class="nav">
+              {%- if pub.abstract-%}
+              <li><a href="#" data-toggle="collapse" data-target="#{{ pub.citekey }}abs">Abstract</a></li>
+              {%- endif -%}
+              {%- if pub.keywords %}
+              <li><a href="#" data-toggle="collapse" data-target="#{{ pub.citekey }}kw">Keywords</a></li>
+              {%- endif %}
+              <li><a href="#" data-toggle="collapse" data-target="#{{ pub.citekey }}bib">BibTeX</a></li>
+              {%- if pub.pdf %}
+              <li><a href="{{ pub.pdf }}" type="application/pdf">PDF</a></li>
+              {%- endif -%}
+              {%- if pub.fulltext %}
+              <li><a href="{{ pub.fulltext }}" target="_blank">Publisher page</a></li>
+              {%- endif -%}
+              {%- if pub.poster %}
+              <li><a href="{{ pub.poster }}">Poster</a></li>
+              {%- endif -%}
+              {%- if pub.presentation %}
+              <li><a href="{{ pub.presentation }}">Presentation</a></li>
+              {%- endif %}
+            </ul>
+            <div id="{{ pub.citekey }}bib" class="collapse">
+              <p><strong>BibTeX: </strong></p>
+              <pre>{{ pub.cite_bibtex }}</pre>
+            </div>
+            {%- if pub.keywords %}
+            <div id="{{ pub.citekey }}kw" class="collapse">
+              <p><strong>Keywords: </strong> {{ pub.keywords }}</p>
+            </div>
+            {%- endif %}
+            {%- if pub.abstract %}
+            <div id="{{ pub.citekey }}abs" class="collapse">
+              <p><strong>Abstract: </strong> {{ pub.abstract }}</p>
+            </div>
+            {%- endif %}
+          </div>
+        </li>
+        {%- endfor %}
+      </ol>
+    </div>
+    <div class="tab-pane" id="courses">
+      {%- for degree in page.courses.degrees %}
+      <h4>{{ degree.degree }}</h4>
+      {%- for course in degree.courses %}
+      <p>{{ course.title }} ({{ course.code }})</p>
+      <p>
+        {%- for link in course.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor %}
+      </p>
+      {%- endfor %}
+      {%- endfor %}
+    </div>
+  </div>
+</div>
+{% endblock main %}

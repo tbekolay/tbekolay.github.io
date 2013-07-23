@@ -6,6 +6,16 @@ from flask import url_for
 
 from .filters import get_headings, lead_paragraph, nice_date, slugify, youtubify
 
+TYPE_TEXT = {
+    'techreport': 'CTN Tech Report',
+    'inbook': 'Book Chapter',
+    'inproceedings': 'Conference Proceedings',
+    'proceedings': 'Conference Proceedings',
+    'book': 'Book',
+    'mastersthesis': 'Thesis',
+    'article': 'Journal Article',
+}
+
 
 class Model(object):
     def __init__(self, pages_instance):
@@ -17,8 +27,6 @@ class Model(object):
         return post
 
     def blogposts(self, start=None, end=None):
-        test = lambda p: p.path.startswith('blog/')
-
         page = self.pages.get('blog')
         blogposts = sorted([self.blogpost(p) for p in self.pages
                             if p.path.startswith('blog/')],
@@ -64,72 +72,29 @@ class Model(object):
     #                     key=lambda p: p['name'])
     #     return people
 
-    # def publication(self, pub):
-    #     if pub.meta.has_key('url'):
-    #         pub.fulltext = pub['url']
-    #     if pub['cite_info'].has_key('journal'):
-    #         pub.journal = pub['cite_info']['journal']
-    #     elif pub['type'] == 'techreport':
-    #         pub.journal = "Tech Report"
-    #     elif 'thesis' in pub['type']:
-    #         pub.journal = "Thesis"
-    #     elif 'book' in pub['type']:
-    #         pub.journal = pub['cite_info']['publisher']
-    #     elif pub['cite_info'].has_key('booktitle'):
-    #         pub.journal = pub['cite_info']['booktitle']
+    def publication(self, pub):
+        if pub.meta.has_key('url'):
+            pub.fulltext = pub['url']
+        if pub['cite_info'].has_key('journal'):
+            pub.journal = pub['cite_info']['journal']
+        elif pub['type'] == 'techreport':
+            pub.journal = "Tech Report"
+        elif 'thesis' in pub['type']:
+            pub.journal = "Thesis"
+        elif 'book' in pub['type']:
+            pub.journal = pub['cite_info']['publisher']
+        elif pub['cite_info'].has_key('booktitle'):
+            pub.journal = pub['cite_info']['booktitle']
+        pub.authors = ["<strong>" + name + "</strong>"
+                       if name == "Trevor Bekolay" else name
+                       for name in pub['authors']]
+        pub.type = TYPE_TEXT.get(pub['type'], pub['type'])
+        return pub
 
-    #     pub.authors = [self.authorlink(name) for name in pub['authors']]
-    #     pub.url = url_for('publications_page', citekey=pub['citekey'])
-    #     pub.type = TYPE_TEXT.get(pub['type'], pub['type'])
-    #     return pub
-
-    # def publications(self, end=None, start=None, author=None):
-    #     if author is None:
-    #         test = lambda p: p.path.startswith('publications/')
-    #     else:
-    #         test = lambda p: (p.path.startswith('publications/')
-    #                           and author in p['authors'])
-
-    #     allpubs = sorted([self.publication(pub) for pub in self.pages
-    #                       if test(pub)],
-    #                      reverse=True, key=lambda pub: pub['year'])
-
-    #     if end is not None and len(allpubs) > end:
-    #         allpubs = allpubs[:end]
-    #     if start is not None:
-    #         allpubs = allpubs[start:]
-
-    #     return allpubs
-
-    # def research(self, topic):
-    #     def _recursive_map(f, data):
-    #         if isinstance(data, list):
-    #             return [_recursive_map(f, elem) for elem in data]
-    #         else:
-    #             return f(data)
-    #     def _flatten(l):
-    #         for el in l:
-    #             if isinstance(el, list):
-    #                 for sub in _flatten(el):
-    #                     yield sub
-    #             else:
-    #                 yield el
-
-    #     page = self.pages.get('research/' + topic + '_index')
-    #     page.url = url_for('research_topic', topic=topic)
-    #     page.toc = _recursive_map(
-    #         lambda title: {'title': title,
-    #                        'url': url_for('research_page', topic=topic, slug=slugify(title))},
-    #         page['toc'])
-
-    #     page.articles = [self.pages.get('research/' + topic + '/' + slugify(p['title']))
-    #                      for p in _flatten(page.toc)]
-    #     for article in page.articles:
-    #         article.topic = url_for('research_topic', topic=topic)
-    #     for a1, a2 in zip(page.articles[:-1], page.articles[1:]):
-    #         a1.next = url_for('research_page', topic=topic,
-    #                           slug=slugify(a2['title']))
-    #         a2.prev = url_for('research_page', topic=topic,
-    #                           slug=slugify(a1['title']))
-
-    #     return page
+    def research(self):
+        page = self.pages.get('research')
+        page.statement = self.pages.get('research/statement')
+        page.courses = self.pages.get('research/courses')
+        page.publications = [self.publication(self.pages.get('research/' + pub))
+                             for pub in page['publications']]
+        return page
