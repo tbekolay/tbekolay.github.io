@@ -82,3 +82,13 @@
   </div>
 </div>
 {% endblock main %}
+{% block extrajs %}
+    <script type="text/javascript">
+      $(document).ready(function(){
+          var hash = window.location.hash;
+          if (hash === "") { hash = "#statement"; }
+          $('a[href="' + hash + '"]').click();
+      });
+      window.scrollTo(0, 0);
+    </script>
+{% endblock extrajs %}
